@@ -50,6 +50,9 @@
 					var infoWindow = new google.maps.InfoWindow({
          					content: '<div class="sample">' + md['name'] + '</div>' // 吹き出しに表示する内容
        					});
+					marker.addListener("click", function() {
+						infoWindow.open(map,marker);
+					});
 				}
 			}).fail((data) => {
 				console.log(data.responseText);
