@@ -13,7 +13,7 @@
 			dataType: "json",
 			data: dt
 		}).done((data) => {
-			console.log(data);
+			console.log(data[0].Lat);
 		}).fail((data) => {
 			console.log(data.responseText);
 		});
