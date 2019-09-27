@@ -14,7 +14,7 @@
 			dataType: "json",
 			data: dt
 		}).done((data) => {
-			console.log(data);
+			var MyLatLng = new google.map.data.LatLng(data.Lat, data.Lng);
 		}).fail((data) => {
 			console.log(data.responseText);
 		});
