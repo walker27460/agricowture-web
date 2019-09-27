@@ -27,10 +27,13 @@
 			dataType: "json",
 			data: dt
 		}).done((data) => {
-			var MyLatLng = new google.map.data.LatLng(data.Lat, data.Lng);
+			var dataobj = JSON.parse(data.responseText);
+			var MyLatLng = new google.map.data.LatLng(dataobj.Lat, dataobj.Lng);
+			
 		}).fail((data) => {
 			console.log(data.responseText);
 		});
+			
 		var Options = {
       			zoom: 15, //地図の縮尺値
       			center: MyLatLng, //地図の中心座標
