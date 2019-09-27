@@ -26,8 +26,8 @@
 				data: dt
 			}).done((data) => {
 				var position = {
-					lat: data[0].Lat,
-					lng: data[0].Lng
+					lat: Number(data[0].Lat),
+					lng: Number(data[0].Lng)
 				}
 				var MyLatLng = new google.maps.LatLng(data[0].Lat, data[0].Lng);
 				var Options = {
