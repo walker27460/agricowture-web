@@ -4,6 +4,19 @@
 		<title>Agricowture Web</title>
 	</head>
 	<body>
+		<div id="map"></div>
+		<style>
+    			html {
+      				height: 100%;
+   			}
+   			body {
+      				height: 100%;
+    			}
+   			#map {
+      				height: 100%;
+      				width: 100%;
+    			}
+  		</style>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://maps.google.com/maps/api/js?key=AIzaSyC_hA4JV7D9uWabDe17QQhIpYQ4SPJaVYE&language=ja"></script>
 		<script>
@@ -18,6 +31,12 @@
 		}).fail((data) => {
 			console.log(data.responseText);
 		});
+		var Options = {
+      			zoom: 15, //地図の縮尺値
+      			center: MyLatLng, //地図の中心座標
+      			mapTypeId: 'roadmap' //地図の種類
+    		};
+		var map = new google.maps.Map(document.getElementById('map'), Options);
 		</script>
 	</body>
 </html>
