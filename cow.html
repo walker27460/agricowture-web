@@ -25,6 +25,10 @@
 				dataType: "json",
 				data: dt
 			}).done((data) => {
+				var position = {
+					lat: data[0].Lat,
+					lng: data[0].Lng
+				}
 				var MyLatLng = new google.maps.LatLng(data[0].Lat, data[0].Lng);
 				var Options = {
 					zoom: 15, //地図の縮尺値
@@ -32,6 +36,10 @@
 					mapTypeId: 'roadmap' //地図の種類
 				};
 				var map = new google.maps.Map(document.getElementById('map'), Options);
+				var marker = new google.maps.Marker({
+					position: pos,
+					map: map
+				});
 			}).fail((data) => {
 				console.log(data.responseText);
 			});
