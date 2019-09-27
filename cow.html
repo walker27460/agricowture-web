@@ -2,41 +2,43 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Agricowture Web</title>
-	</head>
-	<body>
-		<div id="map"></div>
 		<style>
-    			html {
-      				height: 100%;
-   			}
-   			body {
-      				height: 100%;
-    			}
-   			#map {
-      				height: 100%;
-      				width: 100%;
-    			}
-  		</style>
+		html {
+			height: 100%;
+		}
+		body {
+			height: 100%;
+		}
+		#map {
+			height: 100%;
+			width: 100%;
+		}
+		</style>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://maps.google.com/maps/api/js?key=AIzaSyC_hA4JV7D9uWabDe17QQhIpYQ4SPJaVYE&language=ja"></script>
 		<script>
-		var dt = "";
-		$.ajax({
-			type: "GET",
-			url: "https://ed448f0d.ngrok.io/get",
-			dataType: "json",
-			data: dt
-		}).done((data) => {
-			var MyLatLng = new google.map.data.LatLng(data.Lat, data.Lng);
-			var Options = {
-      			zoom: 15, //地図の縮尺値
-      			center: MyLatLng, //地図の中心座標
-      			mapTypeId: 'roadmap' //地図の種類
-    			};
-			var map = new google.maps.Map(document.getElementById('map'), Options);
-		}).fail((data) => {
-			console.log(data.responseText);
-		});
+		window.onload = function () {
+			var dt = "";
+			$.ajax({
+				type: "GET",
+				url: "https://ed448f0d.ngrok.io/get",
+				dataType: "json",
+				data: dt
+			}).done((data) => {
+				var MyLatLng = new google.maps.LatLng(data[0].Lat, data[0].Lng);
+				var Options = {
+					zoom: 15, //地図の縮尺値
+					center: MyLatLng, //地図の中心座標
+					mapTypeId: 'roadmap' //地図の種類
+				};
+				var map = new google.maps.Map(document.getElementById('map'), Options);
+			}).fail((data) => {
+				console.log(data.responseText);
+			});
+		}
 		</script>
+	</head>
+	<body>
+		<div id="map"></div>
 	</body>
 </html>
