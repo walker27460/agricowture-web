@@ -25,21 +25,24 @@
 				dataType: "json",
 				data: dt
 			}).done((data) => {
-				var position = {
-					lat: Number(data[0].Lat),
-					lng: Number(data[0].Lng)
-				}
 				var MyLatLng = new google.maps.LatLng(data[0].Lat, data[0].Lng);
-				var Options = {
+				
+					var Options = {
 					zoom: 15, //地図の縮尺値
 					center: MyLatLng, //地図の中心座標
 					mapTypeId: 'roadmap' //地図の種類
 				};
 				var map = new google.maps.Map(document.getElementById('map'), Options);
-				var marker = new google.maps.Marker({
-					position: position,
-					map: map
-				});
+				for(let i = 0;i<data.length;i++){
+					var position = {
+						lat: Number(data[i].Lat),
+						lng: Number(data[i].Lng)
+						}
+					var marker = new google.maps.Marker({
+						position: position,
+						map: map
+					});
+				}
 			}).fail((data) => {
 				console.log(data.responseText);
 			});
