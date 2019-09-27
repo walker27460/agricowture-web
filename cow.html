@@ -4,13 +4,11 @@
 		<title>Agricowture Web</title>
 	</head>
 	<body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script>
-	$.ajax({
-		type: 'get',
-		url: 'http://ik1-340-30120.vs.sakura.ne.jp/get',
-		dataType: 'json'
-	});
+		var request = XMLHttpRequest();
+		request.open("GET","http://ik1-340-30120.vs.sakura.ne.jp/");
+		request.send();
+		alert(request.responseText);
 	</script>
 	</body>
 <html>
