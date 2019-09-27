@@ -5,7 +5,7 @@
 	</head>
 	<body>
 	<script>
-		var request = XMLHttpRequest();
+		var request = new XMLHttpRequest();
 		request.open("GET","http://ik1-340-30120.vs.sakura.ne.jp/");
 		request.send();
 		alert(request.responseText);
