@@ -34,14 +34,22 @@
 				};
 				var map = new google.maps.Map(document.getElementById('map'), Options);
 				for(let i = 0;i<data.length;i++){
-					var position = {
+					var md = {
+						name: "牛" + String(i+1),
 						lat: Number(data[i].Lat),
 						lng: Number(data[i].Lng)
-						}
+					}
+					var position = {
+						lat: md['lat'],
+						lng: md['lng']
+					}
 					var marker = new google.maps.Marker({
 						position: position,
 						map: map
 					});
+					var infoWindow = new google.maps.InfoWindow({
+         					content: '<div class="sample">' + md['name'] + '</div>' // 吹き出しに表示する内容
+       					});
 				}
 			}).fail((data) => {
 				console.log(data.responseText);
