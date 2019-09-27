@@ -29,17 +29,18 @@
 		}).done((data) => {
 			var dataobj = JSON.parse(data.responseText);
 			var MyLatLng = new google.map.data.LatLng(dataobj.Lat, dataobj.Lng);
-			
+			var Options = {
+      			zoom: 15, //地図の縮尺値
+      			center: MyLatLng, //地図の中心座標
+      			mapTypeId: 'roadmap' //地図の種類
+    			};
+			var map = new google.maps.Map(document.getElementById('map'), Options);
 		}).fail((data) => {
 			console.log(data.responseText);
 		});
 			
-		var Options = {
-      			zoom: 15, //地図の縮尺値
-      			center: MyLatLng, //地図の中心座標
-      			mapTypeId: 'roadmap' //地図の種類
-    		};
-		var map = new google.maps.Map(document.getElementById('map'), Options);
+		
+		
 		</script>
 	</body>
 </html>
