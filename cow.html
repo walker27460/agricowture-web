@@ -44,6 +44,14 @@
 					center: mapLatLng, //地図の中心座標
 					mapTypeId: 'roadmap' //地図の種類
 				};
+				function clickEvent(i) {
+					infoWindow[i].open(map, marker[i]);
+					google.maps.event.addListener(infoWindow[i],"closeclick",function() {
+						google.maps.event.addListenerOnce(marker[i], "click", function(event) {
+							infoWindow[i].open(map.marker[i])
+						});
+					});
+				}
 				var map = new google.maps.Map(document.getElementById('map'), Options);				
 				for (var i = 0; i < md.length; i++) {
         				var markerLatLng = new google.maps.LatLng({
@@ -57,12 +65,7 @@
 					infoWindow[i] = new google.maps.InfoWindow({
 						content: md[i]['name']
 					});
-					infoWindow[i].open(map, marker[i]);
-					google.maps.event.addListener(infoWindow[i],"closeclick",function() {
-						google.maps.event.addListenerOnce(marker[i], "click", function(event) {
-							infoWindow[i].open(map.marker[i])
-						});
-					});
+					clickEvent(i);
 				}
 			}).fail((data) => {
 				console.log(data.responseText);
