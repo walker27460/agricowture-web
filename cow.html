@@ -28,6 +28,13 @@
 				var md=[];
 				var marker = [];
 				var infoWindow = [];
+				for(let i=0;i<data.length;i++) {
+					md[i] = {
+						name: "牛" + String(data[i].CowID),
+						lat: Number(data[i].Lat),
+						lng: Number(data[i].Lng)
+					}
+				}
 				var mapLatLng = new google.maps.LatLng({
 					lat: md[0]['lat'],
 					lng: md[0]['lng']
@@ -37,13 +44,7 @@
 					center: mapLatLng, //地図の中心座標
 					mapTypeId: 'roadmap' //地図の種類
 				};
-				for(let i=0;i<data.length;i++) {
-					md[i] = {
-						name: "牛" + String(data[i].CowID),
-						lat: Number(data[i].Lat),
-						lng: Number(data[i].Lng)
-					}
-				}
+				
 				var map = new google.maps.Map(document.getElementById('map'), Options);
 				function clickEvent(i) {
 					marker[i].addListener('click', function() {
