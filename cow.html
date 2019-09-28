@@ -54,7 +54,12 @@
          					position: markerLatLng, // マーカーを立てる位置を指定
             					map: map // マーカーを立てる地図を指定
        					});
-  					attachMessage(marker[i], md[i]['name']);
+  					
+					google.maps.event.addListener(marker, 'click', function(event) {
+    						new google.maps.InfoWindow({
+        						content: md[i]['name']
+      						}).open(marker[i].getMap(), marker);
+    					});
 				}
 			}).fail((data) => {
 				console.log(data.responseText);
