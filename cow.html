@@ -46,11 +46,7 @@
 				};
 				
 				var map = new google.maps.Map(document.getElementById('map'), Options);
-				function clickEvent(i) {
-					marker[i].addListener('click', function() {
-						infoWindow[i].open(map.marker[i])
-					});	
-				}
+				
 				
 				for (var i = 0; i < md.length; i++) {
         				var markerLatLng = new google.maps.LatLng({
@@ -65,6 +61,11 @@
 						content: '<div class="map">' + md[i]['name'] + '</div>'
 					});
 					clickEvent(i);
+				}
+				function clickEvent(i) {
+					marker[i].addListener('click', function() {
+						infoWindow[i].open(map.marker[i]);
+					});
 				}
 			}).fail((data) => {
 				console.log(data.responseText);
