@@ -63,7 +63,7 @@
             					map: map // マーカーを立てる地図を指定
        					});
 					infoWindow[i] = new google.maps.InfoWindow({
-						content: md[i]['name']
+						content: '<div class="map">' + md[i]['name'] + '</div>'
 					});
 					clickEvent(i);
 				}
