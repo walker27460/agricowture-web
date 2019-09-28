@@ -64,7 +64,7 @@
 						return function() {
 							infoWindow[i].open(map,marker[i])
 						}
-					})(marker[i], i);
+					})(marker[i], i));
 				}
 			}).fail((data) => {
 				console.log(data.responseText);
