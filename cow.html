@@ -28,6 +28,16 @@
 				var md=[];
 				var marker = [];
 				var infoWindow = [];
+				var Options = {
+					zoom: 15, //地図の縮尺値
+					center: mapLatLng, //地図の中心座標
+					mapTypeId: 'roadmap' //地図の種類
+				};
+				var mapLatLng = new google.maps.LatLng({
+					lat: md[0]['lat'],
+					lng: md[0]['lng']
+				});
+				
 				var map = new google.maps.Map(document.getElementById('map'), Options);
 				for(let i=0;i<data.length;i++) {
 					md[i] = {
@@ -36,15 +46,12 @@
 						lng: Number(data[i].Lng)
 					}
 				}
-				var mapLatLng = new google.maps.LatLng({
-					lat: md[0]['lat'],
-					lng: md[0]['lng']
-				})
-				var Options = {
-					zoom: 15, //地図の縮尺値
-					center: mapLatLng, //地図の中心座標
-					mapTypeId: 'roadmap' //地図の種類
-				};
+				function clickEvent(i) {
+					marker[i].addListener('click', function() {
+						infoWindow[i].open(map.marker[i])
+					});	
+				}
+				
 				for (var i = 0; i < md.length; i++) {
         				var markerLatLng = new google.maps.LatLng({
 						lat: md[i]['lat'],
@@ -58,12 +65,6 @@
 						content: '<div class="map">' + md[i]['name'] + '</div>'
 					})
 					clickEvent(i);
-				
-				}
-				function clickEvent(i) {
-					marker[i].addListener('click', function() {
-						infoWindow[i].open(map.marker[i])
-					});	
 				}
 			}).fail((data) => {
 				console.log(data.responseText);
