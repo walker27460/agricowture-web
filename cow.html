@@ -58,7 +58,7 @@
             					map: map // マーカーを立てる地図を指定
        					});
 					infoWindow[i] = new google.maps.InfoWindow({
-						content: '<div class="map">' + md[i]['name'] + '</div>'
+						content: md[i]['name']
 					});
 					marker[i].addListener(marker[i],'click', (function(marker,i) {
 						return function() {
