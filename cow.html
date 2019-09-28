@@ -60,13 +60,11 @@
 					infoWindow[i] = new google.maps.InfoWindow({
 						content: '<div class="map">' + md[i]['name'] + '</div>'
 					});
-					clickEvent(i)
-					
-				}
-				function clickEvent() {
-					marker[i].addListener('click', function() {
-						infoWindow[i].open(map, marker[i]);
-					});
+					marker[i].addListener(marker[i],'click', (function(marker,i) {
+						return function() {
+							infoWindow[i].open(map,marker[i])
+						}
+					})(marker[i], i);
 				}
 			}).fail((data) => {
 				console.log(data.responseText);
