@@ -45,10 +45,10 @@
 					mapTypeId: 'roadmap' //地図の種類
 				};
 				function clickEvent(i) {
-					infoWindow[i].open(map, marker[i]);
+					infoWindow[i].open(map, marker[i])
 					google.maps.event.addListener(infoWindow[i],"closeclick",function() {
 						google.maps.event.addListenerOnce(marker[i], "click", function(event) {
-							infoWindow[i].open(map.marker[i])
+							infoWindow[i].open(map.marker[i]);
 						});
 					});
 				}
