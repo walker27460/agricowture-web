@@ -63,7 +63,7 @@
             					map: map // マーカーを立てる地図を指定
        					});
 					infoWindow[i] = new google.maps.InfoWindow({
-						content: (data[i]['Estrus'] === '1')? '<div class="map">' + '発情期の' + md[i]['name'] + '<a href=https://agricowture.herokuapp.com/flightdrone/>ドローンを飛ばす</a></div>'
+						content: (data[i]['Estrus'] === '1')? '<div class="map">' + '発情期の' + md[i]['name'] + '<a href=https://agricowture.herokuapp.com/flightdrone/' + data[i]['CowID'] + '>ドローンを飛ばす</a></div>': '<div class="map">' + md[i]['name'] + '</div>'
 					});
 					clickEvent(i);
 				}
