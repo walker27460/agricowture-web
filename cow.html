@@ -44,10 +44,7 @@
 					center: mapLatLng, //地図の中心座標
 					mapTypeId: 'roadmap' //地図の種類
 				};
-				
-				var map = new google.maps.Map(document.getElementById('map'), Options);
-				
-				
+				var map = new google.maps.Map(document.getElementById('map'), Options);				
 				for (var i = 0; i < md.length; i++) {
         				var markerLatLng = new google.maps.LatLng({
 						lat: md[i]['lat'],
@@ -57,14 +54,7 @@
          					position: markerLatLng, // マーカーを立てる位置を指定
             					map: map // マーカーを立てる地図を指定
        					});
-					infoWindow[i] = new google.maps.InfoWindow({
-						content: md[i]['name']
-					});
-  					google.maps.event.addListener(infoWindow[i], "closeclick", function() {
-    						google.maps.event.addListenerOnce(marker[i], "click", function(event) {
-     							infoWindow[i].open(map, marker[i]);
-						});
-					});
+  					attachMessage(marker[i], md[i]['name']);
 				}
 			}).fail((data) => {
 				console.log(data.responseText);
