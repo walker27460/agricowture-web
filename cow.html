@@ -63,7 +63,7 @@
             					map: map // マーカーを立てる地図を指定
        					});
 					infoWindow[i] = new google.maps.InfoWindow({
-						content: '<div class="map">' + md[i]['name'] + '</div>'
+						content: (data[i]['Estrus'] === '1')? '<div class="map">' + '発情期の' + md[i]['name'] + '<a href=https://agricowture.herokuapp.com/flightdrone/>ドローンを飛ばす</a></div>'
 					});
 					clickEvent(i);
 				}
