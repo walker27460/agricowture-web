@@ -61,7 +61,7 @@
 						content: '<div class="map">' + md[i]['name'] + '</div>'
 					});
 					marker[i].addListener('click', function() {
-						infoWindow[i].open(map.marker[i]);
+						infoWindow[i].open(map, marker[i]);
 					});
 				}
 			}).fail((data) => {
