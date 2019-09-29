@@ -81,14 +81,13 @@
         			<label for="tab1">タブ1</label>
         			<input type="radio" value="2" id="tab2" v-model="isActive"></input>
 				<label for="tab2">タブ2</label>
+				<div id="map"></div>
 			</div>
 			<ul>
 				<li v-if="isActive == '1'">
-            				<p class="title">テスト</p>
-            				<div id="map"></div>
+            				
         			</li>
         			<li v-else-if="isActive == '2'">
-            				<p class="title">テスト2</p>
             				<iframe src="https://calendar.google.com/calendar/embed?src=2hgte3b66etcvg1g6bgcu2qans%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
         			</li>
 			</ul>
@@ -132,6 +131,11 @@
 			#contents p.title {
 				font-size: 16px;
 				font-weight: bold;
+			}
+			.tabs input:checked ~ .map {
+				padding: 5px 0;
+				height: auto;
+				opacity: 1;
 			}
 		</style>
 		<script>
