@@ -64,7 +64,7 @@
             					map: map // マーカーを立てる地図を指定
        					});
 					infoWindow[i] = new google.maps.InfoWindow({
-						content: (data[i]['Estrus'] === '1')? '<div class="map">' + '発情期の' + md[i]['name'] + ' ' +'<a href=https://agricowture.herokuapp.com/flightdrone/' + data[i]['CowID']+ '>ドローンを飛ばす</a></div>': '<div class="map">' + md[i]['name'] + '</div>'
+						content: (Number(data[i]['Estrus']) >= 1)? '<div class="map">' + '発情期の' + md[i]['name'] + ' ' +'<a href=https://agricowture.herokuapp.com/flightdrone/' + data[i]['CowID']+ '>ドローンを飛ばす</a></div>': '<div class="map">' + md[i]['name'] + '</div>'
 					});
 					clickEvent(i);
 				}
@@ -75,17 +75,17 @@
 		</script>
 	</head>
 	<body>
+		<!--
 		<div id="tabBox">
 			<div id="tabs">
 				<input type="radio" value="1" id="tab1" v-model="isActive"></input>
         			<label for="tab1">タブ1</label>
         			<input type="radio" value="2" id="tab2" v-model="isActive"></input>
 				<label for="tab2">タブ2</label>
-				<div id="map"></div>
 			</div>
 			<ul>
 				<li v-if="isActive == '1'">
-            				
+            				<div id="map"></div>
         			</li>
         			<li v-else-if="isActive == '2'">
             				<iframe src="https://calendar.google.com/calendar/embed?src=2hgte3b66etcvg1g6bgcu2qans%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
@@ -141,6 +141,7 @@
 				}
 			});
 		</script>
-		
+		-->
+		<div id="map"></div>
 	</body>
 </html>
