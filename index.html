@@ -2,6 +2,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Agricowture Web</title>
+		<!-- CSSスタイル指定始まり -->
 		<style>
 		html {
 			height: 100%;
@@ -14,32 +15,36 @@
 			width: 100%;
 		}
 		</style>
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<script src="https://maps.google.com/maps/api/js?key=AIzaSyAoHtZ_FzkEevFk_NMJ9q3KBPQAw08CDcg&language=ja"></script>
-		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<!-- CSSスタイル指定終わり -->
+		<!-- 依存関係読み込み始まり -->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> <!-- スクリプト1 -->
+		<script src="https://maps.google.com/maps/api/js?key=AIzaSyAoHtZ_FzkEevFk_NMJ9q3KBPQAw08CDcg&language=ja"></script> <!-- スクリプト2 -->
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script> <!-- スクリプト3 -->
+		<!-- 依存関係読み込み終わり -->
+		<!-- Webサイト本体スクリプト読み込み -->
 		<script>
 		window.onload = function () {
-			var dt = "";
-			$.ajax({
-				type: "GET",
-				url: "https://agricowture.herokuapp.com/get",
-				dataType: "json",
-				data: dt
-			}).done((data) => {
-				var md=[];
-				var marker = [];
-				var infoWindow = [];
+			var dt = ""; // 本来通信時に渡すデータだが渡すべきものはないので空にします
+			$.ajax({ // スクリプト1で提供されているAjaxという通信機能を用いて通信します
+				type: "GET", //GETリクエストを送る
+				url: "https://agricowture.herokuapp.com/get",　// リクエストを送るサーバーを指定する
+				dataType: "json", // 今回は返ってくるデータのタイプが分かったので、データタイプを指定します
+				data: dt //返ってくるデータを受け取る変数です(渡すデータに上書きされます)
+			}).done((data) => { // 通信成功時の実行する関数
+				var md = []; //リクエストした牛のデータを格納する配列
+				var marker = []; // マーカーを立てるためのデータを格納する配列
+				var infoWindow = [];　// 吹き出しを表示するデータを格納する配列
 				for(let i=0;i<data.length;i++) {
 					md[i] = {
 						name: "牛" + String(data[i].CowID),
 						lat: Number(data[i].Lat),
 						lng: Number(data[i].Lng)
 					}
-				}
+				} // データを格納
 				var mapLatLng = new google.maps.LatLng({
 					lat: md[0]['lat'],
 					lng: md[0]['lng']
-				});
+				}); //地図の最初の表示地点設定
 				var Options = {
 					zoom: 15, //地図の縮尺値
 					center: mapLatLng, //地図の中心座標
@@ -52,23 +57,24 @@
 							infoWindow[i].open(map, marker[i]);
 						});
 					});
-				}
+				}　// 吹き出し実装
 				var map = new google.maps.Map(document.getElementById('map'), Options);				
 				for (var i = 0; i < md.length; i++) {
         				var markerLatLng = new google.maps.LatLng({
 						lat: md[i]['lat'],
 						lng: md[i]['lng']
-					}); // 緯度経度のデータ作成
+					}); // マーカーの緯度経度のデータ作成
         				marker[i] = new google.maps.Marker({ // マーカーの追加
          					position: markerLatLng, // マーカーを立てる位置を指定
             					map: map // マーカーを立てる地図を指定
        					});
 					infoWindow[i] = new google.maps.InfoWindow({
 						content: (Number(data[i]['Estrus']) >= 1)? '<div class="map">' + '発情期の' + md[i]['name'] + ' ' +'<a href=https://agricowture.herokuapp.com/flightdrone/' + data[i]['CowID']+ '>ドローンを飛ばす</a></div>': '<div class="map">' + md[i]['name'] + '</div>'
+						// 発情期であるか否か条件分岐
 					});
 					clickEvent(i);
 				}
-			}).fail((data) => {
+			}).fail((data) => {　// 通信失敗したときに実行する関数
 				console.log(data.responseText);
 			});
 		}
@@ -76,6 +82,7 @@
 		<noscript>
 			<h3>申し訳ございません。こちらのページはJavaScriptが有効でないとご利用になれません。</h3>
 		</noscript>
+		<!-- JSが動かないときのタグ -->	
 	</head>
 	<body>
 		<!--
