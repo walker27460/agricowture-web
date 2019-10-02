@@ -24,16 +24,16 @@
 		<!-- Webサイト本体スクリプト読み込み -->
 		<script>
 		window.onload = function () {
-			var dt = ""; // 本来通信時に渡すデータだが渡すべきものはないので空にします
-			$.ajax({ // スクリプト1で提供されているAjaxという通信機能を用いて通信します
-				type: "GET", //GETリクエストを送る
-				url: "https://agricowture.herokuapp.com/get",　// リクエストを送るサーバーを指定する
-				dataType: "json", // 今回は返ってくるデータのタイプが分かったので、データタイプを指定します
-				data: dt //返ってくるデータを受け取る変数です(渡すデータに上書きされます)
-			}).done((data) => { // 通信成功時の実行する関数
-				var md = []; //リクエストした牛のデータを格納する配列
-				var marker = []; // マーカーを立てるためのデータを格納する配列
-				var infoWindow = [];　// 吹き出しを表示するデータを格納する配列
+			var dt = "";
+			$.ajax({
+				type: "GET",
+				url: "http://ik1-340-30120.vs.sakura.ne.jp/get",
+				dataType: "json", 
+				data: dt
+			}).done((data) => { 
+				var md = []; 
+				var marker = []; 
+				var infoWindow = [];
 				for(let i=0;i<data.length;i++) {
 					md[i] = {
 						name: "牛" + String(data[i].CowID),
