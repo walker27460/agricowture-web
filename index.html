@@ -23,6 +23,9 @@
 		<!-- 依存関係読み込み終わり -->
 		<!-- Webサイト本体スクリプト読み込み -->
 		<script>
+		$(function(){
+			$("#tabs").tabs();
+		});
 		window.onload = function () {
 			var dt = "";
 			$.ajax({
@@ -69,7 +72,7 @@
             					map: map // マーカーを立てる地図を指定
        					});
 					infoWindow[i] = new google.maps.InfoWindow({
-						content: (Number(data[i]['Estrus']) >= 1)? '<div class="map">' + '発情期の' + md[i]['name'] + ' ' +'<a href=https://agricowture.herokuapp.com/flightdrone/' + data[i]['CowID']+ '>ドローンを飛ばす</a></div>': '<div class="map">' + md[i]['name'] + '</div>'
+						content: (Number(data[i]['Estrus']) == 2)? '<div class="map">' + '発情期の' + md[i]['name'] + ' ' +'<a href=https://agricowture.herokuapp.com/flightdrone/' + data[i]['CowID']+ '>ドローンを飛ばす</a></div>': '<div class="map">' + md[i]['name'] + '</div>'
 						// 発情期であるか否か条件分岐
 					});
 					clickEvent(i);
@@ -85,73 +88,17 @@
 		<!-- JSが動かないときのタグ -->	
 	</head>
 	<body>
-		<!--
-		<div id="tabBox">
-			<div id="tabs">
-				<input type="radio" value="1" id="tab1" v-model="isActive"></input>
-        			<label for="tab1">タブ1</label>
-        			<input type="radio" value="2" id="tab2" v-model="isActive"></input>
-				<label for="tab2">タブ2</label>
-			</div>
+		<div id="tabs">
 			<ul>
-				<li v-if="isActive == '1'">
-            				<div id="map"></div>
-        			</li>
-        			<li v-else-if="isActive == '2'">
-            				<iframe src="https://calendar.google.com/calendar/embed?src=2hgte3b66etcvg1g6bgcu2qans%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
-        			</li>
+				<li><a href="#tab-1">Map</a></li>
+				<li><a href="#tab-2">Calendar</a></li>
 			</ul>
+			<div id="tab-1">
+				<div id="map"></div>
+			</div>
+			<div id="tab-2">
+				<iframe src="https://calendar.google.com/calendar/embed?src=2hgte3b66etcvg1g6bgcu2qans%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+			</div>
 		</div>
-		<style>
-			#tabs {
-				overflow: hidden;
-			}
- 
-			#tabs input {
-				display: none;
-			}
- 
-			#tabs label {
-				display: inline-block;
-				line-height: 40px;
-				width: 120px;
-				text-align: center;
-				cursor: pointer;
-				background: #eee;
-				transition: 0.3s;
-				border-radius: 10px 10px 0 0;
-			}
-			#tabs input:checked + label,
-			#tabs label:hover {
-				background: #56B4BE;
-				color: #fff;
-			}
-			#contents {
-				width: 500px;
-				height: 90px;
-				padding: 5px 10px;
-				box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.2);
-				border: 1px solid #eee;
-				border-top: 2px solid #56B4BE;
-			}
-			#contents p {
-				font-size: 15px;
-				margin: 0;
-			}
-			#contents p.title {
-				font-size: 16px;
-				font-weight: bold;
-			}
-		</style>
-		<script>
-			new Vue({
-				el: '#tabBox',
-				data: {
-					isActive: '1'
-				}
-			});
-		</script>
-		-->
-		<div id="map"></div>
 	</body>
 </html>
