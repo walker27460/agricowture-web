@@ -28,9 +28,6 @@
 		<!-- 依存関係読み込み終わり -->
 		<!-- Webサイト本体スクリプト読み込み -->
 		<script>
-		$(function(){
-			$('#tabs').tabs();
-		});
 		window.onload = function () {
 			var dt = "";
 			$.ajax({
@@ -94,17 +91,23 @@
 		<iframe id="calendar" src="https://calendar.google.com/calendar/embed?src=2hgte3b66etcvg1g6bgcu2qans%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 	</head>
 	<body>
-		<div id="tabs">
-			<ul>
-				<li><a href="#maptab">Map</a></li>
-				<li><a href="#caltab">Calendar</a></li>
-			<ul>
-			<div id="maptab">
-				<a href="#map"></a>
-			</div>
-			<div id="caltab">
-				<a href="#calendar"></a>
-			</div>
-		</div>
+		<script>
+			$(function() {
+      				/*クリックイベント*/
+      				$('.tab_btn').on('click', function() {
+        			/* 一旦.tab_itemから.is-active-itemを外す */
+        			$('.tab_item').removeClass("is-active-item");
+        			/* クリックした.tab_btnに対応する.tab_itemに.is-active-itemをつける */
+        			$($(this).attr("href")).addClass("is-active-item");
+      				});
+    			});
+		</script>
+		
+		<a class="tab_btn" href="#item1">Map</a>
+  		<a class="tab_btn" href="#item2">Calendar</a>
+
+  		<!-- タブのコンテンツ部分 -->
+  		<div class="tab_item is-active-item" id="item1"><div id="map"></div></div>
+  		<div class="tab_item" id="item2"><a href="#calendar"></div>
 	</body>
 </html>
