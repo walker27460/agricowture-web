@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<!-- CSSスタイル指定始まり -->
+		<style>
+		html {
+			height: 100%;
+		}
+		#map {
+			height: 100%;
+			width: 100%;
+		}
+		</style>
+		<!-- CSSスタイル指定終わり -->
+		<!-- 依存関係読み込み始まり -->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> <!-- スクリプト1 -->
+		<script src="https://maps.google.com/maps/api/js?key=AIzaSyAoHtZ_FzkEevFk_NMJ9q3KBPQAw08CDcg&language=ja"></script> <!-- スクリプト2 -->
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script> <!-- スクリプト3 -->
+		<script
+  			src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+  			integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+  			crossorigin="anonymous"></script>
+		<!-- 依存関係読み込み終わり -->
+		<!-- Webサイト本体スクリプト読み込み -->
+		<script>
+		window.onload = function() {
+			var dt = "";
+			$.ajax({
+				type: "GET",
+				url: "https://agricowture.herokuapp.com/get",
+				dataType: "json", 
+				data: dt
+			}).done((data) => { 
+				var md = []; 
+				var marker = []; 
+				var infoWindow = [];
+				for(let i=0;i<data.length;i++) {
+					md[i] = {
+						name: "牛" + String(data[i].CowID),
+						lat: Number(data[i].Lat),
+						lng: Number(data[i].Lng)
+					}
+				} // データを格納
+				var mapLatLng = new google.maps.LatLng({
+					lat: md[0]['lat'],
+					lng: md[0]['lng']
+				}); //地図の最初の表示地点設定
+				var Options = {
+					zoom: 15, //地図の縮尺値
+					center: mapLatLng, //地図の中心座標
+					mapTypeId: 'roadmap' //地図の種類
+				};
+				function clickEvent(i) {
+					infoWindow[i].open(map, marker[i])
+					google.maps.event.addListener(infoWindow[i],"closeclick",function() {
+						google.maps.event.addListenerOnce(marker[i], "click", function(event) {
+							infoWindow[i].open(map, marker[i]);
+						});
+					});
+				}　// 吹き出し実装
+				var map = new google.maps.Map(document.getElementById('map'), Options);				
+				for (var i = 0; i < md.length; i++) {
+        				var markerLatLng = new google.maps.LatLng({
+						lat: md[i]['lat'],
+						lng: md[i]['lng']
+					}); // マーカーの緯度経度のデータ作成
+        				marker[i] = new google.maps.Marker({ // マーカーの追加
+         					position: markerLatLng, // マーカーを立てる位置を指定
+            					map: map // マーカーを立てる地図を指定
+       					});
+					infoWindow[i] = new google.maps.InfoWindow({
+						content: (Number(data[i]['Estrus']) == 2)? '<div class="map">' + '発情期の' + md[i]['name'] + ' ' +'<a href=https://agricowture.herokuapp.com/flightdrone/' + data[i]['CowID']+ '>ドローンを飛ばす</a></div>': '<div class="map">' + md[i]['name'] + '</div>'
+						// 発情期であるか否か条件分岐
+					});
+					clickEvent(i);
+				}
+			}).fail((data) => {　// 通信失敗したときに実行する関数
+				console.log(data.responseText);
+			});
+		}
+		</script>
