@@ -91,6 +91,41 @@
 		<iframe src="https://calendar.google.com/calendar/embed?src=2hgte3b66etcvg1g6bgcu2qans%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 	</head>
 	<body>
+		<style>
+			.tab_item {
+  				display: none;
+			}
+
+			.is-active-item {
+  				display: block;
+			}
+			a {
+  				display: block;
+  				color: inherit;
+  				text-decoration: none;
+			}
+
+			.tab_btn {
+  				font-size: 24px;
+  				padding: 5px;
+  				background-color: #E0F2F7;
+				display: inline-block;
+  				opacity: 0.5;  /* 非アクティブなボタンは半透明にする */
+  				border-radius: 5px 5px 0 0;
+			}
+
+			.is-active-btn {
+  				opacity: 1;  /* アクティブなボタンは半透明を解除 */
+  				color: #00BFFF; /* 文字色も変える */
+			}
+			.tab_item {
+  				width: 400px;
+  				height: 300px;
+  				padding: 5px;
+  				color: #00BFFF;
+  				background-color: #E0F2F7;
+			}
+		</style>
 		<script>
 			$(function() {
       				/*クリックイベント*/
@@ -107,7 +142,7 @@
   		<a class="tab_btn" href="#item2">Calendar</a>
 
   		<!-- タブのコンテンツ部分 -->
-  		<div class="tab_item is-active-item" id="item1"><div id="map"></div></div>
+  		<div class="tab_item is-active-item" id="item1"><a href="#map"></div>
   		<div class="tab_item" id="item2">
 			<iframe src="https://calendar.google.com/calendar/embed?src=2hgte3b66etcvg1g6bgcu2qans%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 		</div>
