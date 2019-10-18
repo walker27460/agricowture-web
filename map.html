@@ -2,9 +2,13 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<title>Agricowture Web</title>
 		<!-- CSSスタイル指定始まり -->
 		<style>
 		html {
+			height: 100%;
+		}
+		body {
 			height: 100%;
 		}
 		#map {
@@ -24,7 +28,7 @@
 		<!-- 依存関係読み込み終わり -->
 		<!-- Webサイト本体スクリプト読み込み -->
 		<script>
-		window.onload = function() {
+		window.onload = function () {
 			var dt = "";
 			$.ajax({
 				type: "GET",
@@ -80,7 +84,13 @@
 			});
 		}
 		</script>
+		<noscript>
+			<h3>申し訳ございません。こちらのページはJavaScriptが有効でないとご利用になれません。</h3>
+		</noscript>
+		<!-- JSが動かないときのタグ -->
 	</head>
 	<body>
-		<div id="map"></div>
+		<div id="tabs">
+	
 	</body>
+</html>
