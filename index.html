@@ -63,6 +63,16 @@
 		</script>
 	</head>
 	<body>
+		<script>
+			$(function() {
+				$('.jquery .tabs li').click(function() {
+					var index = $('.jquery .tabs li').index(this);
+					$('.jquery .tabs li').removeClass('active');
+					$(this).addClass('active');
+					$('.jquery .contents li').removeClass('active').eq(index).addClass('active');
+				})
+			})
+		</script>
   		<div class="jquery">
 			<ul class="tab">
 				<li class="active">Map</li>
