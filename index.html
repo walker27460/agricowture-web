@@ -63,26 +63,6 @@
 		</script>
 	</head>
 	<body>
-		<script>
-			$(function() {
-				$('.jquery .tabs li').click(function() {
-					var index = $('.jquery .tabs li').index(this);
-					$('.jquery .tabs li').removeClass('active');
-					$(this).addClass('active');
-					$('.jquery .contents li').removeClass('active').eq(index).addClass('active');
-				})
-			})
-		</script>
-  		<div class="jquery">
-			<ul class="tab">
-				<li class="active">Map</li>
-				<li>Calendar</li>
-			</ul>
-			
-			<ul>
-				<li class="active"><div id="map"></div></li>
-				<li><iframe src="https://calendar.google.com/calendar/embed?src=2hgte3b66etcvg1g6bgcu2qans%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe></li>
-			</ul>
-		</div>
+		<div id="map"></div>
 	</body>
 </html>
